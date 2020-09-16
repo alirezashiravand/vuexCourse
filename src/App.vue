@@ -8,6 +8,9 @@
       <br>
       <router-view />
     </v-content>
+    <v-snackbar v-model="$store.state.error.showError">
+    {{$store.state.error.errorText}}
+    </v-snackbar>
   </v-app>
 </template>
 
@@ -15,6 +18,8 @@
 import NewStudent from "./components/NewStudent";
 import Students from "./components/Students";
 import EditStudent from "./components/EditStudent";
+import axios from "axios";
+import store from "./store.js"
 
 
 export default {
@@ -26,8 +31,14 @@ export default {
   },
   data() {
     return {
-      //
+    //
     };
+  },
+  async beforeCreate() {
+
+      this.$store.dispatch('getStudent');
+
+
   }
 };
 </script>
